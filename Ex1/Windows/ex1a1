@@ -1,0 +1,74 @@
+/* Ex #1a Windows: This program solving hanoi tower problem in recursion with father
+* process and child
+* =============================================================================
+* Written by
+: Muhammad Egbariya - 305140931 & Mohamad Amer - 315336115
+* login
+: muhammadeg / mohamadam
+* Course/Year
+: OS1 2019
+* Year
+: B
+* =============================================================================
+* Input: NULL file.
+* -----------------------------------------------------------------------------
+* output: each tower = time of the process.
+*
+*****************************************************************************
+*/
+
+//include section
+#include <stdio.h>
+#include <stdlib.h>
+#include <process.h>
+#include <time.h>
+
+//define(s) section.
+#define size 5
+#define tower1 10
+#define tower2 20
+#define tower3 25
+#define tower4 30
+#define tower5 35
+
+//-------------------------- prototypes section -------------------------------
+void check_fork(int status);
+void solve_tower(int num_of_disks);
+
+//------------------------------- main ----------------------------------------
+int main() {
+	int j, child[size] = { tower1,tower2,tower3,tower4,tower5 };
+
+	for (j = 0; j < size; j++) {
+
+		solve_tower(child[j]);
+	}
+
+	exit(EXIT_SUCCESS);
+}
+//-----------------------------------------------------------------------------
+//---------------------------- check the new process --------------------------
+void check_fork(int status)
+{
+	if (status == -1) {
+		perror("cannot fork()");
+		exit(EXIT_FAILURE);
+	}
+}
+//-----------------------------------------------------------------------------
+//------------------------------ returns time of one process ------------------
+void solve_tower(int num_of_disks)
+{
+	time_t second, temp_time;
+	char str[10];
+	int status;
+	second = time(NULL);
+	snprintf(str, 10, "%d", num_of_disks);
+	status = _spawnl(P_WAIT, "ex1a2.exe", "ex1a2.exe", str, NULL);
+	check_fork(status);
+	temp_time = time(NULL);
+	second = temp_time - second;
+	printf("%d = %d \n", num_of_disks, (int)second);
+}
+//-----------------------------------------------------------------------------
+
