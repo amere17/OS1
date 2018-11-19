@@ -53,13 +53,13 @@ void doChild(char action[]) {
 	res=str2args(str);
 	//---------------------------------
 	if (strcmp(action, "plus\n") == 0)
-		doAction("plus",res);
+		doAction("./plus",res);
 	else if (strcmp(action, "minus\n") == 0)
-		doAction("minus",res);
+		doAction("./minus",res);
 	else if (strcmp(action, "sum\n") == 0)
 		doAction("./sum",res);
 	else if (strcmp(action, "max\n") == 0)
-		doAction("max",res);
+		doAction("./max",res);
 	else {
 		puts("error");
 		exit(0);
